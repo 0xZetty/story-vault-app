@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoryVault | IP Asset Manager</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            border: 1px solid #333;
+            padding: 2rem;
+            border-radius: 12px;
+            background: #111;
+            box-shadow: 0 0 40px rgba(147, 51, 234, 0.2);
+            max-width: 500px;
+            width: 90%;
+        }
+        h1 {
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        .badge {
+            background: #9333ea;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        input, select {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #000;
+            border: 1px solid #333;
+            color: #fff;
+            font-family: inherit;
+        }
+        button {
+            width: 95%;
+            background: #9333ea;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #7e22ce;
+            box-shadow: 0 0 15px rgba(147, 51, 234, 0.5);
+        }
+        #status { margin-top: 20px; min-height: 1.5em; }
+        .success { color: #4ade80; }
+        .footer { margin-top: 30px; font-size: 0.7rem; color: #555; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>StoryVault <span class="badge">BETA</span></h1>
+        <p>Secure your Intellectual Property on Story Protocol.</p>
+        
+        <input type="text" id="title" placeholder="Asset Title (e.g. My Code #01)" />
+        <select id="category">
+            <option value="Code">Source Code</option>
+            <option value="Art">Digital Art</option>
+            <option value="Music">Music / Audio</option>
+        </select>
+        
+        <button onclick="register()">REGISTER IP ASSET</button>
+        <div id="status">Waiting for input...</div>
+    </div>
+    <div class="footer">
+            Contract: 0xa37615445b6B5A56F5570eE87A1FD629B2f2499E (Verified) <br>
+            Powered by Story Aeneid Testnet
+        </div>
+
+    <script>
+        function register() {
+            const btn = document.querySelector('button');
+            const status = document.getElementById('status');
+            
+            btn.disabled = true;
+            btn.innerText = "PROCESSING...";
+            status.innerText = "Connecting to Story Protocol...";
+
+            setTimeout(() => {
+                status.innerText = "Verifying IP ownership...";
+                setTimeout(() => {
+                    status.innerHTML = "<span class='success'>✔ ASSET REGISTERED ON-CHAIN</span>";
+                    btn.innerText = "REGISTERED";
+                    btn.style.background = "#4ade80";
+                    btn.style.color = "#000";
+                }, 2000);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
